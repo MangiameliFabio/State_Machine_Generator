@@ -2,7 +2,7 @@ class_name %BASESTATENAME%
 extends Node
 
 
-var state_machine = null
+var state_machine : %STATEMACHINENEAME%
 var character : %CHARACTERNAME%
 
 

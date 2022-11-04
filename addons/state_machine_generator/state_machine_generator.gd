@@ -11,6 +11,9 @@ var state_line
 
 #Check if buttons are disabled or not
 func _process(delta):
+	if(!root_object):
+		return
+		
 	if(root_object.has_node(root_object.name + "StateMachine")):
 		state_machine_button.disabled = true
 		state_button.disabled = false
@@ -86,7 +89,6 @@ func load_state_machine_template():
 	file.close()
 	content = content.replace("%STATEMACHINENAME%", root_object.name + "StateMachine")
 	content = content.replace("%CHARACTERNAME%", root_object.name)
-	content = content.replace("%STATENAME%", root_object.name + "BaseState")
 	return content
 
 # Create gdscript for base state
@@ -105,6 +107,7 @@ func load_base_state_template():
 	file.close()
 	content = content.replace("%BASESTATENAME%", root_object.name + "BaseState")
 	content = content.replace("%CHARACTERNAME%", root_object.name)
+	content = content.replace("%STATEMACHINENEAME%", root_object.name + "StateMachine")
 	return content
 
 # Change state_name when user edits LineEdit in dock

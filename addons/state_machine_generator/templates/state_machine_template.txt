@@ -3,11 +3,9 @@ extends Node
 
 onready var character:= owner as %CHARACTERNAME%
 
-signal transitioned(state_name)
-
 export var initial_state := NodePath()
 
-var state: %STATENAME%
+var state
 
 func _ready() -> void:
 	yield(owner, "ready")
