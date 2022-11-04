@@ -10,8 +10,12 @@ config_version=4
 
 [application]
 
-config/name="temp"
+config/name="State Machine Generator"
 config/icon="res://icon.png"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/state_machine_generator/plugin.cfg" )
 
 [gui]
 
