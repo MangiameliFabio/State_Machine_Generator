@@ -1,5 +1,0 @@
-- State nur adden wenn State MAchine vorhanden ist
-- Exception handling
-  - inital_state falsch
-  - root_object empty
-- Wenn eine State MAchine vorhanden nicht noch eine hinzufügen
