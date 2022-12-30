@@ -1,6 +1,6 @@
 # State Machine Generator
 
-This Godot Addon can be used to create simple template code for a character state machines.
+This Godot Addon can be used to create simple template code for character state machines.
 
 ## Instalation
 If you want to use this addon simply copy the addon folder in your project directory. In Godot you need to select Project->Project Settings and go into the Plugins tab. Here you can enable the State Machine Generator. When its eneabled you should find a State MAchine Generator tab docked on the right side of the editor. Maybe you need to reload your project to make it work.
