@@ -1,14 +1,14 @@
 class_name %STATEMACHINENAME%
 extends Node
 
-onready var character:= owner as %CHARACTERNAME%
+@onready var character:= owner as %CHARACTERNAME%
 
-export var initial_state := NodePath()
+@export var initial_state : NodePath
 
 var state
 
 func _ready() -> void:
-	yield(owner, "ready")
+	await owner.ready
 	
 	#Check if initial_state is valid and assign it. 
 	if(has_node(initial_state)):

@@ -1,4 +1,4 @@
-tool
+@tool
 extends EditorPlugin
 
 var dock
@@ -34,14 +34,14 @@ func edit(object:Object) -> void:
 
 #Create dock at the right side of the screen and connect buttons.
 func _enter_tree():
-	dock = preload("res://addons/state_machine_generator/state_machine_generator_dock.tscn").instance()
+	dock = preload("res://addons/state_machine_generator/state_machine_generator_dock.tscn").instantiate()
 	state_machine_button = dock.get_node("AddStateMachineButton")
 	state_button = dock.get_node("HBoxContainer/AddStateButton")
 	state_line = dock.get_node("HBoxContainer/StateLine")
 	
-	state_machine_button.connect("pressed", self, "add_state_machine")
-	state_button.connect("pressed", self, "add_state")
-	state_line.connect("text_changed", self, "change_state_name")
+	state_machine_button.connect("button_down", add_state_machine)
+	state_button.connect("button_down", add_state)
+	state_line.connect("text_changed", change_state_name)
 	
 	add_control_to_dock(DOCK_SLOT_RIGHT_UL, dock)
 
@@ -52,13 +52,14 @@ func _exit_tree():
 
 # Check if directory for state machines exist. If not creates it.
 func create_directory():
-	var dir = Directory.new()
+	var dir = DirAccess.open("res://")
 	if(!dir.dir_exists("res://StateMachines/" + root_object.name + "/States")):
 		dir.make_dir("res://StateMachines/") 
 		dir.make_dir("res://StateMachines/" + root_object.name)	
 		dir.make_dir("res://StateMachines/" + root_object.name + "/States") 
 
 func add_state_machine():
+	root_object = get_tree().get_edited_scene_root()
 	create_directory()
 	
 	#Create state machine node for tree
@@ -75,16 +76,14 @@ func add_state_machine():
 
 # Create gdscript for state machine
 func create_state_machine():
-	var file = File.new()
-	file.open("res://StateMachines/" + root_object.name + "/" + root_object.name + "_State_Machine" + ".gd", File.WRITE)
+	var file = FileAccess.open("res://StateMachines/" + root_object.name + "/" + root_object.name + "_State_Machine" + ".gd", FileAccess.WRITE)
 	file.store_string(load_state_machine_template())
 	file.close()
 	return file
 
 # Load code for state machine script from template and change placeholder
 func load_state_machine_template():
-	var file = File.new()
-	file.open("res://addons/state_machine_generator/templates/state_machine_template.txt", File.READ)
+	var file = FileAccess.open("res://addons/state_machine_generator/templates/state_machine_template.txt", FileAccess.READ)
 	var content = file.get_as_text()
 	file.close()
 	content = content.replace("%STATEMACHINENAME%", root_object.name + "StateMachine")
@@ -93,16 +92,14 @@ func load_state_machine_template():
 
 # Create gdscript for base state
 func create_base_state():
-	var file = File.new()
-	file.open("res://StateMachines/" + root_object.name + "/" + root_object.name + "_Base_State" + ".gd", File.WRITE)
+	var file = FileAccess.open("res://StateMachines/" + root_object.name + "/" + root_object.name + "_Base_State" + ".gd", FileAccess.WRITE)
 	file.store_string(load_base_state_template())
 	file.close()
 	return file
 
 # Load code for base state script from template and change placeholder
 func load_base_state_template():
-	var file = File.new()
-	file.open("res://addons/state_machine_generator/templates/base_state_template.txt", File.READ)
+	var file = FileAccess.open("res://addons/state_machine_generator/templates/base_state_template.txt", FileAccess.READ)
 	var content = file.get_as_text()
 	file.close()
 	content = content.replace("%BASESTATENAME%", root_object.name + "BaseState")
@@ -127,16 +124,14 @@ func add_state():
 
 # Create gdscript for new state
 func create_state():
-	var file = File.new()
-	file.open("res://StateMachines/" +  root_object.name + "/States/" + root_object.name + "_" + state_name + ".gd", File.WRITE)
+	var file = FileAccess.open("res://StateMachines/" +  root_object.name + "/States/" + root_object.name + "_" + state_name + ".gd", FileAccess.WRITE)
 	file.store_string(load_state_template())
 	file.close()
 	return file
 	
 # Load code for new state script from template and change placeholder
 func load_state_template():
-	var file = File.new()
-	file.open("res://addons/state_machine_generator/templates/state_template.txt", File.READ)
+	var file = FileAccess.open("res://addons/state_machine_generator/templates/state_template.txt", FileAccess.READ)
 	var content = file.get_as_text()
 	content = content.replace("%BASESTATENAME%", root_object.name + "BaseState")
 	file.close()	

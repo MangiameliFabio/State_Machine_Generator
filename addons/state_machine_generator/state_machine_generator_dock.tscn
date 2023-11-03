@@ -3,37 +3,37 @@
 [node name="State Machine Generator" type="VBoxContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -147.0
-margin_top = -23.0
-margin_right = -147.0
-margin_bottom = -23.0
+offset_left = -147.0
+offset_top = -23.0
+offset_right = -147.0
+offset_bottom = -23.0
 
 [node name="Label" type="Label" parent="."]
-margin_right = 1024.0
-margin_bottom = 14.0
+offset_right = 1024.0
+offset_bottom = 14.0
 text = "State Machine Generator"
 align = 1
 autowrap = true
 
 [node name="AddStateMachineButton" type="Button" parent="."]
-margin_top = 18.0
-margin_right = 1024.0
-margin_bottom = 38.0
+offset_top = 18.0
+offset_right = 1024.0
+offset_bottom = 38.0
 text = "Add State Machine"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-margin_top = 42.0
-margin_right = 1024.0
-margin_bottom = 66.0
+offset_top = 42.0
+offset_right = 1024.0
+offset_bottom = 66.0
 
 [node name="StateLine" type="LineEdit" parent="HBoxContainer"]
-margin_right = 949.0
-margin_bottom = 24.0
+offset_right = 949.0
+offset_bottom = 24.0
 size_flags_horizontal = 3
 placeholder_text = "State Name"
 
 [node name="AddStateButton" type="Button" parent="HBoxContainer"]
-margin_left = 953.0
-margin_right = 1024.0
-margin_bottom = 24.0
+offset_left = 953.0
+offset_right = 1024.0
+offset_bottom = 24.0
 text = "add State"
